@@ -3,6 +3,8 @@ package com.prac.msa.awsmsacartservice.awsmsacartservice.service
 import com.prac.msa.awsmsacartservice.awsmsacartservice.client.ProductServiceClient
 import com.prac.msa.awsmsacartservice.awsmsacartservice.client.UserServiceClient
 import com.prac.msa.awsmsacartservice.awsmsacartservice.entity.CartItem
+import com.prac.msa.awsmsacartservice.awsmsacartservice.error.ProductNotFoundException
+import com.prac.msa.awsmsacartservice.awsmsacartservice.error.UserNotFoundException
 import com.prac.msa.awsmsacartservice.awsmsacartservice.repository.CartRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,8 +18,8 @@ class CartService(
 
     @Transactional
     fun addToCart(productId: Long, quantity: Int, userId: Long): CartItem {
-        productServiceClient.isProductExists(productId).let { if (!it) throw Exception("존재하지 않는 제품입니다.") }
-        userServiceClient.isUserExists(userId).let { if (!it) throw Exception("존재하지 않는 유저입니다.") }
+        productServiceClient.isProductExists(productId).let { if (!it) throw ProductNotFoundException("존재하지 않는 제품입니다.") }
+        userServiceClient.isUserExists(userId).let { if (!it) throw UserNotFoundException("존재하지 않는 유저입니다.") }
 
         val cartItem = CartItem(productId = productId, quantity = quantity, userId = userId)
 
