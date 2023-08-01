@@ -14,7 +14,7 @@ class CartController(
     /**
      * POST -  제품을 장바구니에 추가합니다.
      * */
-    @PostMapping
+    @PostMapping("/register")
     fun addToCart(
         @RequestParam productId: Long,
         @RequestParam quantity: Int,
