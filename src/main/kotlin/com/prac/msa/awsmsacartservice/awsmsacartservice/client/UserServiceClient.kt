@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable
 @FeignClient(name = "user-service", url = "\${msa.user-service.url}")
 interface UserServiceClient {
 
-    @GetMapping("/users/{userId}/exists")
+    @GetMapping("/api/users/{userId}/exists")
     fun isUserExists(
         @PathVariable userId: Long
     ): Boolean

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @FeignClient(name = "product-service", url = "\${msa.product-service.url}")
 interface ProductServiceClient {
 
-    @GetMapping("/products/{productId}/exists")
+    @GetMapping("/api/products/{productId}/exists")
     fun isProductExists(
         @PathVariable productId: Long
     ): Boolean
@@ -17,7 +17,7 @@ interface ProductServiceClient {
      *  @param productIds productId list
      * @return productId to productName list pair
      * */
-    @GetMapping("/products/name")
+    @GetMapping("/api/products/name")
     fun getProductNamesByProductIds(
         @RequestParam productIds: List<Long>
     ): List<Pair<Long, String>>
