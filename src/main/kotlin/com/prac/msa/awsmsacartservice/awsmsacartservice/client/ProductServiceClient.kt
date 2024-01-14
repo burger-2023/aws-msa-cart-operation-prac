@@ -13,10 +13,7 @@ interface ProductServiceClient {
         @PathVariable productId: Long
     ): Boolean
 
-    /**
-     *  @param productIds productId list
-     * @return productId to productName list pair
-     * */
+    // product service 로 제품 이름 조회
     @GetMapping("/api/products/name")
     fun getProductNamesByProductIds(
         @RequestParam productIds: List<Long>

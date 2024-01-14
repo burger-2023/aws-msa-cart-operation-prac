@@ -32,7 +32,7 @@ class CartController(
     fun getAllCarts(
         @RequestParam userId: Long
     ): ResponseEntity<List<CartItem>> {
-        val cartItems = cartService.findAllProducts(userId)
+        val cartItems = cartService.getAllCarts(userId)
 
         return ResponseEntity.ok(cartItems)
     }

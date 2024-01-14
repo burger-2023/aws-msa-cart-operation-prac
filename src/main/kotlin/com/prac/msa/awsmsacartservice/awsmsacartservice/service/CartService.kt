@@ -30,10 +30,13 @@ class CartService(
         return cartRepository.save(cartItem)
     }
 
+    // 유저의 전체 장바구니 조회
     @Transactional(readOnly = true)
-    fun findAllProducts(userId: Long): List<CartItem> {
+    fun getAllCarts(userId: Long): List<CartItem> {
+        // 유저의 장바구니 조회
         val carts = cartRepository.findByUserId(userId)
         val productIds = carts.map { it.productId }
+        // product service 로 제품 이름 조회
         productServiceClient.getProductNamesByProductIds(productIds).run {
             carts.forEach { cartItem ->
                 cartItem.productName = this.first { cartItem.productId == it.first }.second
