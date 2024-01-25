@@ -30,7 +30,7 @@ class CartController(
      * */
     @GetMapping
     fun getAllCarts(
-        @RequestParam userId: Long
+        @RequestHeader("userId") userId: Long
     ): ResponseEntity<List<CartItem>> {
         val cartItems = cartService.getAllCarts(userId)
 
