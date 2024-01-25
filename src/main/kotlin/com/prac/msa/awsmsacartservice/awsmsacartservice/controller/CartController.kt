@@ -4,6 +4,7 @@ import com.prac.msa.awsmsacartservice.awsmsacartservice.entity.CartItem
 import com.prac.msa.awsmsacartservice.awsmsacartservice.service.CartService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.lang.Exception
 
 @RestController
 @RequestMapping("/api/carts")
@@ -30,9 +31,10 @@ class CartController(
      * */
     @GetMapping
     fun getAllCarts(
-        @RequestParam userId: Long
+        @RequestParam("userId") userId: Long? ,
+        @RequestHeader("userId") headerUserId: Long?,
     ): ResponseEntity<List<CartItem>> {
-        val cartItems = cartService.getAllCarts(userId)
+        val cartItems = cartService.getAllCarts(userId ?: headerUserId ?: throw Exception("유저 id가 없습니다."))
 
         return ResponseEntity.ok(cartItems)
     }
